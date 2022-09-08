@@ -1,8 +1,0 @@
-{
-    "dbname": "Project1",
-    "user": "postgres",
-    "host": "localhost",
-    "password": "Onepiece1",
-    "port": "5432",
-    "schema": "public"
-}
