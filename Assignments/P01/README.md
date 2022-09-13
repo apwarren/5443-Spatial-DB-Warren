@@ -2,7 +2,7 @@
 #### 9/8/2022
 # 
 ## API for Finding Data About Volcanoes Across the World Stored in a PostgreSQL Database.
-#### Description:
+#### Description: 
 
 This API searches a database containing volcanic data and can be used to perform three different
 types of queries: find_All, find_One, and find_Closest. find_All shows every volcano and its data to

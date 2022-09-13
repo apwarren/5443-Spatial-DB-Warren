@@ -429,7 +429,7 @@ async def findMany(
     get_vol = f"""SELECT * FROM public.volcanoes WHERE"""
 
     #An ID was specified
-    if(id is not None):
+    if(id is not None): 
         get_vol += f""" id = '{id}'  AND"""
 
     #A volcanoid was specified
