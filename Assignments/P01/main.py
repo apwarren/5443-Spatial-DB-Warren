@@ -611,8 +611,4 @@ if __name__ == "__main__":
         #print(cur.fetchall())
 
     #Run the FastAPI as localhost  
-<<<<<<< HEAD
     uvicorn.run("main:app", host="127.0.0.1", port=8080, log_level="debug", reload=True)
-=======
-    uvicorn.run("main:app", host="127.0.0.1", port=8080, log_level="debug", reload=True)
->>>>>>> 2133801c32ea48c3f00ea40c511511aca96de923
