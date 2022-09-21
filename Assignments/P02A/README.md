@@ -5,7 +5,7 @@
 #### Description: 
 
 This folder holds large datatables, each one containing its respective spatial data. It also contains the queries used to make each table and creating an index based
-on the geometry column. The following datasets contained in their own postgresql datatables are:
+on the geometry column. All but the airports table was derived from shp files. The airport data was taken and cleaned from a csv file. The following datasets contained in their own postgresql datatables are:
 
 |   #   | Table Name | Description |
 | :---: | ----------- | ---------------------- |
