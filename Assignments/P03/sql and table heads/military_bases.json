@@ -1,0 +1,112 @@
+{
+    "1": {
+        "gid": "1",
+        "ansicode": "NULL",
+        "areaid": "110509768024",
+        "fullname": "Tripler Army Medical Ctr",
+        "mtfcc": "K2110",
+        "aland": "1443458",
+        "awater": "0",
+        "intptlat": "+21.3620086",
+        "intptlon": "-157.8896492"
+    },
+    "2": {
+        "gid": "2",
+        "ansicode": "NULL",
+        "areaid": "110509768183",
+        "fullname": "Aliamanu Mil Res",
+        "mtfcc": "K2110",
+        "aland": "2104133",
+        "awater": "0",
+        "intptlat": "+21.3609483",
+        "intptlon": "-157.9117716"
+    },
+    "3": {
+        "gid": "3",
+        "ansicode": "NULL",
+        "areaid": "110509768096",
+        "fullname": "Waianae-Kai Mil Res",
+        "mtfcc": "K2110",
+        "aland": "34407",
+        "awater": "0",
+        "intptlat": "+21.4469221",
+        "intptlon": "-158.1909990"
+    },
+    "4": {
+        "gid": "4",
+        "ansicode": "NULL",
+        "areaid": "110509768142",
+        "fullname": "Schofield Barracks Mil Res",
+        "mtfcc": "K2110",
+        "aland": "20509112",
+        "awater": "0",
+        "intptlat": "+21.4993768",
+        "intptlon": "-158.0824984"
+    },
+    "5": {
+        "gid": "5",
+        "ansicode": "NULL",
+        "areaid": "110509768059",
+        "fullname": "Helemano Mil Res",
+        "mtfcc": "K2110",
+        "aland": "1204608",
+        "awater": "0",
+        "intptlat": "+21.5361123",
+        "intptlon": "-158.0194801"
+    },
+    "324": {
+        "gid": "324",
+        "ansicode": "NULL",
+        "areaid": "1108310917050",
+        "fullname": "Nas Whiting Field Milton",
+        "mtfcc": "K2110",
+        "aland": "346114",
+        "awater": "0",
+        "intptlat": "+30.6875223",
+        "intptlon": "-87.0322436"
+    },
+    "325": {
+        "gid": "325",
+        "ansicode": "NULL",
+        "areaid": "1108310917134",
+        "fullname": "Nas Whiting Field Milton",
+        "mtfcc": "K2110",
+        "aland": "315606",
+        "awater": "0",
+        "intptlat": "+30.7213308",
+        "intptlon": "-87.0034545"
+    },
+    "457": {
+        "gid": "457",
+        "ansicode": "NULL",
+        "areaid": "110274709419",
+        "fullname": "Ft A P Hill",
+        "mtfcc": "K2110",
+        "aland": "298769672",
+        "awater": "3040534",
+        "intptlat": "+38.1203879",
+        "intptlon": "-77.2711959"
+    },
+    "6": {
+        "gid": "6",
+        "ansicode": "NULL",
+        "areaid": "1108310958136",
+        "fullname": "Ng Florence Mil Res",
+        "mtfcc": "K2110",
+        "aland": "75993617",
+        "awater": "0",
+        "intptlat": "+33.1375881",
+        "intptlon": "-111.3291098"
+    },
+    "7": {
+        "gid": "7",
+        "ansicode": "NULL",
+        "areaid": "110435324283",
+        "fullname": "Stone Ranch Mil Res",
+        "mtfcc": "K2110",
+        "aland": "7440946",
+        "awater": "0",
+        "intptlat": "+41.3654109",
+        "intptlon": "-72.2716641"
+    }
+}
