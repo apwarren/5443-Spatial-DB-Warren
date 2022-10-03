@@ -2,7 +2,7 @@
 ## Project 3 - Missile Command (Part 1)
 
 <center>
-<img src="my_missile_trajectories.geojson" width="300">
+<img src="missile_paths.jpg" width="300">
 </center>
 
 ## Overview
