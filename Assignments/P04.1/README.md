@@ -27,6 +27,11 @@ with its bearing. The bearing of each ship faces away from the fields bounds. Al
 - Give each ship a bearing facing away from the game field's outer bounds
 - Push all ship information and the name of our fleet to [final_output.json](https://github.com/apwarren/5443-Spatial-DB-Warren/tree/master/Assignments/P04.1/final_output.json)
 
+#### Visual of the sector seperate from the bounding box using geojson.io
+<img src="https://user-images.githubusercontent.com/70217207/204109786-1ab6a067-88c5-43fb-a3a2-03ee18bec5fc.png" width="300" />
+
+#### Close up visual of all ships generated within the sector using geojson.io
+<img src="https://user-images.githubusercontent.com/70217207/204109807-344abae6-a6cf-4be0-b5ce-34de1cbbca96.png" width="300" />
 
 |   #   | File Link | Description |
 | :---: | ----------- | ---------------------- |
