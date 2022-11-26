@@ -18,7 +18,7 @@ properly. Each ship is then spaced out 222m from bow to stern from each other an
 also staggered to keep them clustered but relatively spaced out. After all ships are generated, each one's center point is stored along
 with its bearing. The bearing of each ship faces away from the fields bounds. All final data generated is then dumped into [final_output.json](https://github.com/apwarren/5443-Spatial-DB-Warren/tree/master/Assignments/P04.1/final_output.json) along with the name of the fleet.
 
-### <u> A simplified series of steps explained above: </u>
+#### <u> A simplified series of steps explained above: </u>
 - Get the game field's bounding box and which sector we are assigned
 - Seperate the sector from the bounding box and store it as a seperate polygon
 - Generate a random starting point within the sector
