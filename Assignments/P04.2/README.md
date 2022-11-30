@@ -26,7 +26,7 @@ project are:
 
 
 Queries were made using these tables to test accessing data within postgresql and utilizing postgis functions to obtain information.
-The code for the queries that were considered can be found here [queries](https://github.com/apwarren/5443-Spatial-DB-Warren/tree/master/Assignments/P04.2/SQL%table%and%queries/queries/queries.py) and the results obtained from each query is here: [results](https://github.com/apwarren/5443-Spatial-DB-Warren/tree/master/Assignments/P04.2/SQL%table%and%queries/queries/queries.json). Queries considered were:
+The code for the queries that were considered can be found here [queries](https://github.com/apwarren/5443-Spatial-DB-Warren/blob/main/Assignments/P04.2/SQL%20tables%20and%20queries/queries/queries.py) and the results obtained from each query is here: [results](https://github.com/apwarren/5443-Spatial-DB-Warren/blob/main/Assignments/P04.2/SQL%20tables%20and%20queries/queries/queries.json). Queries considered were:
 - rotating the entire fleet a certain number of degrees
 - rotating a single ship a certan number of degrees
 - rotating a specific gun on a particular ship and changing its elevation given the type of gun it is
