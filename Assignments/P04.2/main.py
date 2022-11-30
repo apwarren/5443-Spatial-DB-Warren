@@ -135,14 +135,48 @@ with DatabaseCursor("config.json") as cur:
     ship_dicts = []
     with open("ships.json", "r") as myFile:
         ships = json.load(myFile)
-        cur.execute("DELETE FROM public.ship;")
+
+        #Fill in the ship table with all of our ships' data
+
+        cur.execute("""DELETE FROM public.gun_state; 
+                       DELETE FROM public.ships_guns;
+                       DELETE FROM public.ship_state;
+                       DELETE FROM public.torpedo_state;
+                       DELETE FROM public.ship; """)
         for ship in ships:
+            count = 0
             insert = f"""INSERT INTO public.ship(ship_id, category, shipclass, length, width, torpedolaunchers, armament, armor, speed, turn_radius)
              VALUES (
                 {ship["id"]}, '{ship["category"]}', '{ship["shipClass"]}',
               {ship["length"]}, {ship["width"]}, '{json.dumps(ship['torpedoLaunchers'])}', '{json.dumps(ship["armament"])}', '{json.dumps(ship["armor"])}', {ship["speed"]}, {ship["turn_radius"]});"""
             cur.execute(insert)
             ship_dicts.append({'ship_id' : ship["id"]})
+
+            #Fill in the ship_guns table
+            for weapon in ship['armament']:
+                insert = f"""INSERT INTO public.ships_guns VALUES(
+                    {ship["id"]}, {count}, '{weapon['gun']['name']}', {weapon['pos']});"""
+
+                cur.execute(insert)
+
+                #Fill in the initial state of the gun
+                insert = f"""INSERT INTO public.gun_state VALUES(
+                    {ship['id']}, {count}, 0, 0, {weapon['gun']['ammo'][0]['count']});"""
+                cur.execute(insert)
+                count += 1
+            
+            #Fill in the initial state of torpedo launchers if the ship has them
+            if(ship["torpedoLaunchers"] is not None):
+                t_count = 0
+                for torpedo in ship["torpedoLaunchers"]:
+                    insert = f"""INSERT INTO public.torpedo_state VALUES(
+                       {ship["id"]},
+                       {t_count},
+                       {torpedo['torpedos']['speed']}, '{torpedo["location"]+", "+torpedo['side']+", "+ torpedo['facing']}',
+                       '{torpedo['torpedos']['name']}'
+                       );"""
+                    cur.execute(insert)
+                    t_count += 1
             
     inside = False
     while(inside is not True):
@@ -320,6 +354,19 @@ with DatabaseCursor("config.json") as cur:
         geojson = geojson[:-1]
         geojson += """]]}},"""
 
+
+    #Move all ship info into ship_state
+    for ship in range(len(ship_dicts)):
+        cur.execute(f"SELECT speed from public.ship WHERE ship.ship_id = {ship_dicts[ship]['ship_id']}")
+        speed = cur.fetchall()[0][0]
+        insert = f"""INSERT INTO ship_state VALUES(
+            {ship_dicts[ship]["ship_id"]},
+            {ship_dicts[ship]["bearing"]},
+            {speed},
+            '{json.dumps(ship_dicts[ship]['location'])}',
+            '{all_ships[ship]}'
+            ); """
+        cur.execute(insert)
 
     geojson = geojson[:-1]
     with open("shipLocations.json", 'w') as f:
