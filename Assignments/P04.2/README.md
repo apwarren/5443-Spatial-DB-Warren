@@ -8,7 +8,7 @@
 #
 #### Description: 
 This code updates the progress from [P04.1](https://github.com/apwarren/5443-Spatial-DB-Warren/tree/master/Assignments/P04.1) and
-includes the implementation of creating tables that will be need for the battleship game. The tables that are implemented in for this
+includes the implementation of creating tables that will be needed for the battleship game. The tables that are implemented in for this
 project are: 
 |   #   | Table Name | Description |
 | :---: | ----------- | ---------------------- |
