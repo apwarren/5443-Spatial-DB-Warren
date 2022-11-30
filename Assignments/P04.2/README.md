@@ -22,7 +22,7 @@ project are:
 |  08  | [ship](https://github.com/apwarren/5443-Spatial-DB-Warren/blob/main/Assignments/P04.2/SQL%20tables%20and%20queries/tables/ship.sql) | Contains the info of a the different types of ships. It holds information such as type of ship and its classification |
 |  09  | [ships_guns](https://github.com/apwarren/5443-Spatial-DB-Warren/blob/main/Assignments/P04.2/SQL%20tables%20and%20queries/tables/ships_guns.sql) | Contains the info of a particular ship's guns. Each gun is identified by a ship's id and its own unique id within the ship. It hold information such as type of gun and its position on the ship |
 |  10  | [torpedo_state](https://github.com/apwarren/5443-Spatial-DB-Warren/blob/main/Assignments/P04.2/SQL%20tables%20and%20queries/tables/torpedo_state.sql) | Contains the info of a particular ship's torpedo. Each torpedo is identified by a ship's id and its own unique id within the ship. It hold information such as location on the ship and what type it is |
-|  10  | [torpedo](https://github.com/apwarren/5443-Spatial-DB-Warren/blob/main/Assignments/P04.2/SQL%20tables%20and%20queries/tables/torpedo.sql) | Contains the info of a general torpedo. Holds information such as it mass, diameter, warhead size, etc.|
+|  11  | [torpedo](https://github.com/apwarren/5443-Spatial-DB-Warren/blob/main/Assignments/P04.2/SQL%20tables%20and%20queries/tables/torpedo.sql) | Contains the info of a general torpedo. Holds information such as it mass, diameter, warhead size, etc.|
 
 
 Queries were made using these tables to test accessing data within postgresql and utilizing postgis functions to obtain information.
