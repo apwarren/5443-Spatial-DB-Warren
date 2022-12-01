@@ -42,7 +42,7 @@ with DatabaseCursor("config.json") as cur:
 
     #Move all ships 60 degrees and update its polygon in the ship_state
     turn_fleet = f"""SELECT ss.ship_id::int, mod((ss.bearing + 60)::int, 360), ST_AsText(
-        ST_Rotate(ss.geom, RADIANS(60 + ss.bearing)
+        ST_Rotate(ss.geom, RADIANS((60 + ss.bearing) * 1)
         ))
          FROM public.ship_state as ss LIMIT 5;"""
     cur.execute(turn_fleet)

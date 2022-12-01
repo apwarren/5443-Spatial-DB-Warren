@@ -47,8 +47,11 @@ bbox = {
 cardinalList = ["N","NNE","NE","ENE","E","ESE","SE","SSE",
         "S","SSW","SW","WSW","W","WNW","NW","NNW"]
 
-geojson = ""
-
+#Look at ships for testing and checking
+geojson = """{
+"type": "FeatureCollection",
+"features": [
+    """
 #Open database cursor to begin PostGIS functions and cutting out which sector of the bounding box we get
 with DatabaseCursor("config.json") as cur:
 
