@@ -535,7 +535,7 @@ class MissileServer(object):
             #Get column names of the missile data
             cur.execute(query)
             missiles = cur.fetchall()[0][0]
-
+ 
             #Show column name along with the missile's values if we have missile to show
             if(missiles['features'] != None):
                 return missiles
@@ -602,27 +602,45 @@ class MissileServer(object):
                 #determine where target_missile is at hit_time
                 select = "st_x(p2) as x,st_y(p2) as y"
                 sql = f"""WITH Q1 AS (
-                    SELECT ST_SetSRID(ST_Project('POINT({current_lon} {current_lat})'::geography, {attack_speed*(hit_time/2)}, {attack_bearing})::geometry,4326
+                    SELECT ST_SetSRID(ST_Project('POINT({current_lon} {current_lat})'::geography, {attack_speed*(hit_time/35)}, {attack_bearing})::geometry,4326
                     ) as p2
                     )
                     SELECT {select}
                     FROM Q1 """
                 try:
                     cur.execute(sql)
-                except Exception:
+                except Exception as e:
+                    print(e)
                     return {'psycopg error at sql query run'}
                 intermediate_loc = cur.fetchall()[0]
+                for i in range(33):
+                    select = "st_x(p2) as x,st_y(p2) as y"
+                    sql2 = f"""WITH Q1 AS (
+                        SELECT ST_SetSRID(ST_Project('POINT({intermediate_loc[0]} {intermediate_loc[1]})'::geography, {attack_speed*(hit_time/35)}, {attack_bearing})::geometry,4326
+                        ) as p2
+                        )
+                        SELECT {select}
+                        FROM Q1 """
+                    try:
+                        cur.execute(sql2)
+                    except Exception as e:
+                        print("here")
+                        return {'psycopg error at sql query run in loop'}
+                    intermediate_loc = cur.fetchall()[0]
+
+
                 #print(intermediate_loc)
                 select = "st_x(p2) as x,st_y(p2) as y"
                 sql2 = f"""WITH Q1 AS (
-                    SELECT ST_SetSRID(ST_Project('POINT({intermediate_loc[0]} {intermediate_loc[1]})'::geography, {attack_speed*(hit_time/2)}, {attack_bearing})::geometry,4326
+                    SELECT ST_SetSRID(ST_Project('POINT({intermediate_loc[0]} {intermediate_loc[1]})'::geography, {attack_speed*(hit_time/35)}, {attack_bearing})::geometry,4326
                     ) as p2
                     )
                     SELECT {select}
                     FROM Q1 """
                 try:
                     cur.execute(sql2)
-                except Exception:
+                except Exception as e:
+                    print("here")
                     return {'psycopg error at sql query run'}
 
 
@@ -634,43 +652,72 @@ class MissileServer(object):
                 #print(attack_loc)
                 #determine where defender missile is at this time as well
                     #bearing of defender_missile
+                
                 sql = f""" SELECT ST_Azimuth(ST_Point(
                     {solution_data.firedfrom_lon}, {solution_data.firedfrom_lat}
                     ),  
                     ST_Point(
                         {solution_data.aim_lon}, {solution_data.aim_lat}
                         ))"""
-                cur.execute(sql)
+                try:
+                    cur.execute(sql)
+                except:
+                    return {"error on azimuth sql for defense"}
                 defend_bearing = cur.fetchall()[0][0]
+
                 defend_speed = missile_data["speed"][missile_data["missiles"][solution_data.missile_type]["speed"]]['ms']
                 select = "st_x(p2) as x,st_y(p2) as y"
                 sql = f"""WITH Q1 AS (
                     SELECT ST_SetSRID(ST_Project(
                         'POINT({solution_data.firedfrom_lon} {solution_data.firedfrom_lat})'::geography, 
-                        {defend_speed*(hit_time/2)}, {defend_bearing})::geometry,4326
+                        {defend_speed*(hit_time/35)}, {defend_bearing})::geometry,4326
                     ) as p2
                     )
                     SELECT {select}
                     FROM Q1 """
-                cur.execute(sql)
+                try:
+                    cur.execute(sql)
+                except:
+                    return {"initial psycopg query sql error in defense point"}
                 intermediate_loc2 = cur.fetchall()[0]
+
+                for i in range(33):
+                    select = "st_x(p2) as x,st_y(p2) as y"
+                    sql2 = f"""WITH Q1 AS (
+                    SELECT ST_SetSRID(ST_Project(
+                        'POINT({intermediate_loc2[0]} {intermediate_loc2[1]})'::geography, 
+                        {defend_speed*(hit_time/35)}, {defend_bearing})::geometry,4326
+                    ) as p2
+                    )
+                    SELECT {select}
+                    FROM Q1 """
+                    try:
+                        cur.execute(sql2)
+                    except Exception as e:
+                        print("here")
+                        return {'psycopg error at sql query run in loop of defense'}
+                    intermediate_loc2 = cur.fetchall()[0]
+
                 sql2 = f"""WITH Q1 AS (
                     SELECT ST_SetSRID(ST_Project(
                         'POINT({intermediate_loc2[0]} {intermediate_loc2[1]})'::geography, 
-                        {defend_speed*(hit_time/2)}, {defend_bearing})::geometry,4326
+                        {defend_speed*(hit_time/35)}, {defend_bearing})::geometry,4326
                     ) as p2
                     )
                     SELECT {select}
                     FROM Q1 """
-                cur.execute(sql2)
+                try:
+                    cur.execute(sql2)
+                except Exception:
+                    return {"final defend_loc error"}
                 defend_loc = cur.fetchall()[0]
             except Exception:
                 return {'defense location sql error'}
 
             try:
                 #get blast radius bounding box for both points
-                attack_blast = missile_data["blast"][missile_data["missiles"][attack_type]["blast"]] / 10
-                defend_blast = missile_data["blast"][missile_data["missiles"][solution_data.missile_type]["blast"]] / 10
+                attack_blast = missile_data["blast"][missile_data["missiles"][attack_type]["blast"]] * 8
+                defend_blast = missile_data["blast"][missile_data["missiles"][solution_data.missile_type]["blast"]] * 8
             except Exception:
                 return {'missile is not in the arsenal'}
 
@@ -733,16 +780,16 @@ class MissileServer(object):
                 #Check to see if altitudes are within range as well    
                 else:
                     #drop down to expected altitude
-                    attack_altitude = altitude - (attack_droprate * hit_time)
+                    attack_altitude = altitude - (attack_droprate * hit_time / 500)
                     defend_altitude  = solution_data.target_alt
                     altitude_diff = abs(attack_altitude - defend_altitude)
 
                     #altitude is within blast range
-                    if(altitude_diff <= (attack_blast * 5) or altitude_diff <= (defend_blast * 5)):
+                    if(altitude_diff <= (attack_blast * 200) or altitude_diff <= (defend_blast * 200)):
                         cur.execute(f"UPDATE public.defender_stats SET missiles_hit_by_team = missiles_hit_by_team + 1 WHERE team_id = {solution_data.team_id};")
                         return {"BOOM!" : "Missile has been struck down! Congrats!! We made it here!!!"}
                     else:
-                        return {"Missed" : " Your missile did not hit its target. The coordinates were correct but the altitude was not in blast range."}
+                        return {"Missed" :f" Your missile did not hit its target. The coordinates were correct but the altitude was not in blast range."}
             except Exception:
                 return {'error with returning'}
 
