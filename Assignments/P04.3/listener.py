@@ -17,7 +17,8 @@ creds = {
      "port": 5672,
      "host": "battleshipgame.fun",
      "password": "kX3aF8x5z0Sw",
-     "hash": "32223921880817397656263709201856725525"
+     "hash": "32223921880817397656263709201856725525",
+     "user" : "kraken"
  }
 print("Comms Listener starting. To exit press CTRL+C ...")
 # create instance of the listener class and sending in the creds

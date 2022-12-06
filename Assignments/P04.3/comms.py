@@ -81,14 +81,12 @@ class Comms(object):
             }
         """
         {
-            "id": 15,
-            "name": "kraken",
-            "regdate": 1669156402,
             "exchange": "battleship",
             "port": 5672,
             "host": "battleshipgame.fun",
-            "password": "kX3aF8x5z0Sw",
-            "hash": "32223921880817397656263709201856725525"
+            "user" : "kraken",
+            "password": "kX3aF8x5z0Sw"
+            
         }
         self.exchange = kwargs.get("exchange", None)
         self.port = kwargs.get("port", 5432)
